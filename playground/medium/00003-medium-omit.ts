@@ -30,7 +30,9 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyOmit<T, K> = any
+type MyExclude<T, U> = T extends U ? never : T;
+
+type MyOmit<T, K extends keyof T> = { [S in MyExclude<keyof T, K>]: T[S] }
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
